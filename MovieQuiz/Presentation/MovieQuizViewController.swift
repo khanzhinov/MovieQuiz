@@ -206,11 +206,28 @@ final class MovieQuizViewController: UIViewController {
     }
     
     // приватный метод, который меняет цвет рамки
-    // принимает на вход булевое значение и ничего не возвращает
     private func showAnswerResult(isCorrect: Bool) {
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.showNextQuestionOrResults()
+        }
+    }
+    
+    // приватный метод, который содержит логику перехода в один из сценариев
+    // метод ничего не принимает и ничего не возвращает
+    private func showNextQuestionOrResults() {
+        if currentQuestionIndex == questions.count - 1 {
+          // идём в состояние "Результат квиза"
+        } else {
+            currentQuestionIndex += 1
+            
+            let nextQuestion = questions[currentQuestionIndex]
+            let viewModel = convert(model: nextQuestion)
+            
+            show(quiz: viewModel)
+        }
     }
     
 
