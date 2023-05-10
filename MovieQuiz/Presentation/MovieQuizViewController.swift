@@ -171,10 +171,19 @@ final class MovieQuizViewController: UIViewController {
     //6. Актив кнопок
     
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
+        let currentQuestion = questions[currentQuestionIndex]
+            let givenAnswer = true
+            
+            showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
         
     }
     
     @IBAction private func noButtonClicked(_ sender: UIButton) {
+        
+        let currentQuestion = questions[currentQuestionIndex] // 1
+        let givenAnswer = false // 2
+        
+        showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
         
     }
     
@@ -195,6 +204,16 @@ final class MovieQuizViewController: UIViewController {
       textLabel.text = step.question
       counterLabel.text = step.questionNumber
     }
+    
+    // приватный метод, который меняет цвет рамки
+    // принимает на вход булевое значение и ничего не возвращает
+    private func showAnswerResult(isCorrect: Bool) {
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 8
+        imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
+    }
+    
+
     
     
     
