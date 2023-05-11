@@ -57,7 +57,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше, чем 5?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4FI-pS-TL2" userLabel="Question Label">
-                                        <rect key="frame" x="0.0" y="423.5" width="328.5" height="300.5"/>
+                                        <rect key="frame" x="0.0" y="423.5" width="332" height="300.5"/>
                                         <color key="backgroundColor" name="YP Black (iOS)"/>
                                         <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="23"/>
                                         <color key="textColor" name="YP WHITE (iOS)"/>
@@ -112,7 +112,9 @@
                         <color key="backgroundColor" name="YP Black (iOS)"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vtx-jB-5Vd" secondAttribute="trailing" constant="20" id="DOw-Kl-kHT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4FI-pS-TL2" secondAttribute="trailing" constant="62" id="NbP-V2-Ql6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vtx-jB-5Vd" secondAttribute="bottom" id="U0g-hv-jkC"/>
+                            <constraint firstItem="4FI-pS-TL2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="62" id="YyR-zW-q4M"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yiN-iL-uIO" secondAttribute="trailing" constant="20" id="hHc-eh-PAB"/>
                             <constraint firstItem="vtx-jB-5Vd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="jAF-Ax-ave"/>
                             <constraint firstItem="vtx-jB-5Vd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="mug-lC-WvU"/>
