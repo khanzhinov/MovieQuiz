@@ -8,37 +8,12 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
     
+    //2. структура для состояния "Вопрос показан"
     
-    //2. структуры, энумы
-    
-    struct ViewModel {
-        let image: UIImage
-        let question: String
-        let questionNumber: String
-    }
-    
-    // для состояния "Вопрос показан"
     struct QuizStepViewModel {
         let image: UIImage
         let question: String
         let questionNumber: String
-    }
-    
-    // для состояния "Результат квиза"
-    struct QuizResultsViewModel {
-        let title: String
-        let text: String
-        let buttonText: String
-    }
-    
-    struct QuizQuestion {
-        // строка с названием фильма,
-        // совпадает с названием картинки афиши фильма в Assets
-        let image: String
-        // строка с вопросом о рейтинге фильма
-        let text: String
-        // булевое значение (true, false), правильный ответ на вопрос
-        let correctAnswer: Bool
     }
     
     //3. Переменные, константы
@@ -88,6 +63,7 @@ final class MovieQuizViewController: UIViewController {
     
     // переменная с индексом текущего вопроса, начальное значение 0
     // (по этому индексу будем искать вопрос в массиве, где индекс первого элемента 0, а не 1)
+    
     private var currentQuestionIndex = 0
     
     // переменная со счётчиком правильных ответов, начальное значение закономерно 0
@@ -263,6 +239,30 @@ final class MovieQuizViewController: UIViewController {
     
 }
     
+//структуры: QuizResultsViewModel, ViewModel, QuizQuestion.
+
+// для состояния "Результат квиза"
+struct QuizResultsViewModel {
+    let title: String
+    let text: String
+    let buttonText: String
+}
+
+struct ViewModel {
+    let image: UIImage
+    let question: String
+    let questionNumber: String
+}
+
+struct QuizQuestion {
+    // строка с названием фильма,
+    // совпадает с названием картинки афиши фильма в Assets
+    let image: String
+    // строка с вопросом о рейтинге фильма
+    let text: String
+    // булевое значение (true, false), правильный ответ на вопрос
+    let correctAnswer: Bool
+}
     
     
     
