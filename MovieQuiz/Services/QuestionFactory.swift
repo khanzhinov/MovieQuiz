@@ -7,9 +7,11 @@
 
 import Foundation
 
-class QuestionFactory {
+class QuestionFactory: QuestionFactoryProtocol {
     
     //переменные:
+    
+
     
     private let questions: [QuizQuestion] = [
         QuizQuestion(
@@ -62,5 +64,6 @@ class QuestionFactory {
         }
         return questions[safe: index]                           // 3
     }
+    
     
 }

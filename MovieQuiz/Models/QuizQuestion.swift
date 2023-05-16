@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-class QuizQuestion {
     
     struct QuizQuestion {
         // строка с названием фильма,
@@ -18,5 +16,3 @@ class QuizQuestion {
         // булевое значение (true, false), правильный ответ на вопрос
         let correctAnswer: Bool
     }
-
-}

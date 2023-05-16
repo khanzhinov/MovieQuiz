@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-class QuizResultsViewModel {
    
     struct QuizResultsViewModel {
         let title: String
@@ -15,4 +13,4 @@ class QuizResultsViewModel {
         let buttonText: String
     }
     
-}
+
