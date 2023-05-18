@@ -62,12 +62,15 @@ class QuestionFactory: QuestionFactoryProtocol {
     
     //методы:
     
-    func requestNextQuestion() -> QuizQuestion? {                       // 1
-        guard let index = (0..<questions.count).randomElement() else {  // 2
-            return nil
+    func requestNextQuestion() {
+        guard let index = (0..<questions.count).randomElement() else {
+            delegate?.didReceiveNextQuestion(question: nil)
+            return
         }
-        return questions[safe: index]                           // 3
-    }
+        
+        let question = questions[safe: index]
+        delegate?.didReceiveNextQuestion(question: question)
+    } 
     
     
 }
