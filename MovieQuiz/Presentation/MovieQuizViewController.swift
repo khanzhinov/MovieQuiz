@@ -12,15 +12,17 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
     
+    
     //2. структура для состояния "Вопрос показан"
     
-   
+    
     
     //3. Переменные, константы
     
     private let questionsAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
+    private var alertPresenter: AlertPresenterProtocol?
     
     // переменная с индексом текущего вопроса, начальное значение 0
     // (по этому индексу будем искать вопрос в массиве, где индекс первого элемента 0, а не 1)
@@ -102,26 +104,27 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
         super.viewDidLoad()
         questionFactory = QuestionFactory(delegate: self)
         questionFactory?.requestNextQuestion()
+        alertPresenter = AlertPresenter (viewController: self)
+    }
+    
+    
+    // MARK: - QuestionFactoryDelegate
+    
+    func didReceiveNextQuestion(question: QuizQuestion?) {
+        guard let question = question else {
+            return
         }
-    
-    
-// MARK: - QuestionFactoryDelegate
-
-func didReceiveNextQuestion(question: QuizQuestion?) {
-    guard let question = question else {
-        return
+        
+        currentQuestion = question
+        let viewModel = convert(model: question)
+        DispatchQueue.main.async { [weak self] in
+            self?.show(quiz: viewModel)
+        }
     }
-    
-    currentQuestion = question
-    let viewModel = convert(model: question)
-    DispatchQueue.main.async { [weak self] in
-        self?.show(quiz: viewModel)
-    }
-}
     
     //6. Актив кнопок
     
-@IBAction private func yesButtonClicked(_ sender: UIButton) {
+    @IBAction private func yesButtonClicked(_ sender: UIButton) {
         guard let currentQuestion = currentQuestion else {
             return
         }
@@ -131,7 +134,7 @@ func didReceiveNextQuestion(question: QuizQuestion?) {
         
     }
     
-@IBAction private func noButtonClicked(_ sender: UIButton) {
+    @IBAction private func noButtonClicked(_ sender: UIButton) {
         
         guard let currentQuestion = currentQuestion else {
             return
@@ -147,9 +150,9 @@ func didReceiveNextQuestion(question: QuizQuestion?) {
     // приватный метод конвертации, который принимает моковый вопрос и возвращает вью модель для главного экрана
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         QuizStepViewModel(
-                    image: UIImage(named: model.image) ?? UIImage(),
-                    question: model.text,
-                    questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
+            image: UIImage(named: model.image) ?? UIImage(),
+            question: model.text,
+            questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
     }
     
     // приватный метод вывода на экран вопроса, который принимает на вход вью модель вопроса и ничего не возвращает
@@ -177,7 +180,7 @@ func didReceiveNextQuestion(question: QuizQuestion?) {
     // приватный метод, который содержит логику перехода в один из сценариев
     // метод ничего не принимает и ничего не возвращает
     private func showNextQuestionOrResults() {
-    
+        
         if currentQuestionIndex == questionsAmount - 1 {
             let text = correctAnswers == questionsAmount ?
             "Поздравляем, Вы ответили на 10 из 10!" :
@@ -191,32 +194,32 @@ func didReceiveNextQuestion(question: QuizQuestion?) {
         } else {
             currentQuestionIndex += 1
             questionFactory?.requestNextQuestion()
-            }
         }
+    }
     
     
     // приватный метод для показа результатов раунда квиза
     // принимает вью модель QuizResultsViewModel и ничего не возвращает
     private func show(quiz result: QuizResultsViewModel) {
-        let alert = UIAlertController(
+        let alertModel = AlertModel(
             title: result.title,
             message: result.text,
-            preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: result.buttonText, style: .default) { [weak self] _ in guard let self = self else {return}
-            
-            self.currentQuestionIndex = 0
-            self.correctAnswers = 0
-            
-            self.questionFactory?.requestNextQuestion()
-        }
-        
-        alert.addAction(action)
-        
-        self.present(alert, animated: true, completion: nil)
+            buttonText: result.buttonText,
+            completion: {[weak self] in guard let self else {return}
+                self.currentQuestionIndex = 0
+                self.correctAnswers = 0
+                
+                self.questionFactory?.requestNextQuestion()
+            }
+        )
+        alertPresenter?.show(whit: alertModel)
     }
-    
 }
+        
+
+    
+    
+
     
 //структуры: QuizResultsViewModel, ViewModel, QuizQuestion.
 
