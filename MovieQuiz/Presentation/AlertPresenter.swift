@@ -22,7 +22,7 @@ class AlertPresenter: AlertPresenterProtocol {
     func show (whit model: AlertModel) {
         let alert = UIAlertController(title: model.title, message: model.message, preferredStyle: .alert)
         let action = UIAlertAction(title: model.buttonText, style: .default) { _ in
-            model.completion ()
+            model.ending ()
         }
         alert.addAction(action)
         viewController?.present(alert, animated: true, completion: nil)

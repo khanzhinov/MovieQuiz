@@ -194,7 +194,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
             title: result.title,
             message: result.text,
             buttonText: result.buttonText,
-            completion: {[weak self] in guard let self else {return}
+            ending: {[weak self] in guard let self else {return}
                 self.currentQuestionIndex = 0
                 self.correctAnswers = 0
                 
@@ -203,6 +203,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
         )
         alertPresenter?.show(whit: alertModel)
     }
+    
 }
         
 //структура: ViewModel
