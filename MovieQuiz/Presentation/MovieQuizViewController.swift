@@ -2,22 +2,13 @@ import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  {
     
-    
-    
-    
-    
     //1. аутлеты для UI элементов
     
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
     
-    
-    //2. структура для состояния "Вопрос показан"
-    
-    
-    
-    //3. Переменные, константы
+    //2. Переменные, константы
     
     private let questionsAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol?
@@ -32,7 +23,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
     // переменная со счётчиком правильных ответов, начальное значение закономерно 0
     private var correctAnswers = 0
     
-    //4.  Мока данные
+    //3.  Мока данные
     
     /*
      Mock-данные
@@ -98,7 +89,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
      Ответ: НЕТ
      */
     
-    //5. viewDidLoad
+    //4. viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,7 +113,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
         }
     }
     
-    //6. Актив кнопок
+    //5. Актив кнопок
     
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         guard let currentQuestion = currentQuestion else {
@@ -145,7 +136,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
         
     }
     
-    //7. Методы
+    //6. Методы
     
     // приватный метод конвертации, который принимает моковый вопрос и возвращает вью модель для главного экрана
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
@@ -197,9 +188,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
         }
     }
     
-    
     // приватный метод для показа результатов раунда квиза
-    // принимает вью модель QuizResultsViewModel и ничего не возвращает
     private func show(quiz result: QuizResultsViewModel) {
         let alertModel = AlertModel(
             title: result.title,
@@ -216,15 +205,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate  
     }
 }
         
-
-    
-    
-
-    
-//структуры: QuizResultsViewModel, ViewModel, QuizQuestion.
+//структура: ViewModel
 
 // для состояния "Результат квиза"
-
 
 struct ViewModel {
     let image: UIImage
