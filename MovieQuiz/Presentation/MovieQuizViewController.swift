@@ -2,7 +2,7 @@ import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, AlertPresenterDelegate {
     // MARK: - Lifecycle
-    //
+    
     
     @IBOutlet weak private var countLabel: UILabel!
     @IBOutlet weak private var imageView: UIImageView!
