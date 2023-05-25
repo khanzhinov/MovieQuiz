@@ -2,11 +2,11 @@ import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, AlertPresenterDelegate {
     // MARK: - Lifecycle
-    
+    //
     
     @IBOutlet weak private var countLabel: UILabel!
     @IBOutlet weak private var imageView: UIImageView!
-    @IBOutlet weak private var textLabel: UIViewController!
+    @IBOutlet weak private var textLabel: UITextView!
     
     private let questionsAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol?
@@ -104,10 +104,11 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             correctAnswers += 1
         }
         
-        /*imageView.layer.masksToBounds = true
+        imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.cornerRadius = 20
-        imageView.layer.borderColor = isCorrect ? UIColor(named: "YP Green")?.cgColor : UIColor(named: "YP Red")?.cgColor */
+        imageView.layer.borderColor = isCorrect ? UIColor.YP
+            .cgColor : UIColor.pink.cgColor
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             self?.showNextQuestionOrResults()
@@ -116,8 +117,11 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     private func show(quiz step: QuizStepViewModel) {
-        
-    }
+             imageView.image = step.image
+             textLabel.text = step.question
+             countLabel.text = step.questionNumber
+             imageView.layer.borderWidth = 0
+         }
     
     private func showNextQuestionOrResults() {
         
@@ -162,5 +166,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
         
     }
+    
 }
 
