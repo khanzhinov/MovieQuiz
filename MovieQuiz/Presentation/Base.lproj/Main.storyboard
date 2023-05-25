@@ -122,7 +122,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="counterLabel" destination="pty-3x-zgG" id="oel-Ex-oIW"/>
+                        <outlet property="countLabel" destination="pty-3x-zgG" id="jVr-6a-dH6"/>
                         <outlet property="imageView" destination="Uex-TM-f0p" id="Ftw-3Z-K8T"/>
                         <outlet property="textLabel" destination="4FI-pS-TL2" id="LXl-El-GAr"/>
                     </connections>
