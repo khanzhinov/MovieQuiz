@@ -117,11 +117,11 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     private func show(quiz step: QuizStepViewModel) {
-             imageView.image = step.image
-             textLabel.text = step.question
-             countLabel.text = step.questionNumber
-             imageView.layer.borderWidth = 0
-         }
+        imageView.image = step.image
+        textLabel.text = step.question
+        countLabel.text = step.questionNumber
+        imageView.layer.borderWidth = 0
+    }
     
     private func showNextQuestionOrResults() {
         
