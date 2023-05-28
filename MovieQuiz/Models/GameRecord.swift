@@ -17,16 +17,4 @@ import Foundation
       static func < (lhs: GameRecord, rhs: GameRecord) -> Bool {
           return lhs.correct < rhs.correct
       }
-      /*
-      static func <= (lhs: GameRecord, rhs: GameRecord) -> Bool {
-          return lhs.correct <= rhs.correct
-      }
-      static func >= (lhs: GameRecord, rhs: GameRecord) -> Bool {
-          return lhs.correct >= rhs.correct
-      }
-      
-      static func > (lhs: GameRecord, rhs: GameRecord) -> Bool {
-          return lhs.correct > rhs.correct
-      }
-      */
   }
