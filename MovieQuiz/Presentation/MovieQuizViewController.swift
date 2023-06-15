@@ -46,12 +46,17 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
        
-       imageView.layer.cornerRadius = 20
-        questionFactory = QuestionFactory(moviesLoader: MoviesLoader()) //delegate: self)
-        statisticService = StatisticServiceImplementation()
+        imageView.layer.cornerRadius = 20
 
-        showLoadingIndicator()
-        questionFactory?.loadData()
+         alertPresenter = AlertPresenter()
+         alertPresenter?.controller = self
+         questionFactory = QuestionFactory(moviesLoader: MoviesLoader())
+         questionFactory?.delegate = self
+         questionFactory?.requestNextQuestion()
+         statisticService = StatisticServiceImplementation()
+
+         questionFactory?.loadData()
+         showLoadingIndicator()
     }
     
     // MARK: - QuestionFactoryDelegate
@@ -115,7 +120,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             guard let totalAccuracy = statisticService?.totalAccuracy else {return}
             
             alertPresenter = AlertPresenter()
-            alertPresenter?.delegate = self
+            alertPresenter?.controller = self
             let alertModel = AlertModel(
                 title: "Этот раунд окончен!",
                 message: """
@@ -132,7 +137,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
                     self.questionFactory?.requestNextQuestion()
                 })
             
-            alertPresenter?.present(alert: alertModel)
+            alertPresenter?.show(alert: alertModel)
         } else {
             currentQuestionIndex += 1
             questionFactory?.requestNextQuestion()
