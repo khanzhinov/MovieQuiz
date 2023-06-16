@@ -43,20 +43,22 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         imageView.layer.cornerRadius = 20
-
-         alertPresenter = AlertPresenter()
-         alertPresenter?.controller = self
-         questionFactory = QuestionFactory(moviesLoader: MoviesLoader())
-         questionFactory?.delegate = self
-         questionFactory?.requestNextQuestion()
-         statisticService = StatisticServiceImplementation()
-
-         questionFactory?.loadData()
-         showLoadingIndicator()
+        
+        alertPresenter = AlertPresenter()
+        alertPresenter?.controller = self
+        questionFactory = QuestionFactory(moviesLoader: MoviesLoader())
+        questionFactory?.delegate = self
+        questionFactory?.requestNextQuestion()
+        statisticService = StatisticServiceImplementation()
+        
+        questionFactory?.loadData()
+        showLoadingIndicator()
     }
     
     // MARK: - QuestionFactoryDelegate
@@ -156,37 +158,37 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         activityIndicator.startAnimating() // включаем анимацию
     }
     
-
-         private func hideLoadingIndicator() {
-             activityIndicator.isHidden = true
-         }
+    
+    private func hideLoadingIndicator() {
+        activityIndicator.isHidden = true
+    }
     
     private func showNetworkError(message: String) {
-                 hideLoadingIndicator()
-
-                 let alertError = UIAlertController(
-                     title: "Что-то пошло не так(",
-                     message: message,
-                     preferredStyle: .alert)
-                 let action = UIAlertAction(title: "Попробовать еще раз?",
-                                            style: .default) { _ in
-
-
-                     self.questionFactory = QuestionFactory(moviesLoader: MoviesLoader())
-
-                     self.questionFactory?.delegate = self
-
-                     self.statisticService = StatisticServiceImplementation()
-
-                     self.questionFactory?.loadData()
-
-                     self.showLoadingIndicator()
-
-                 }
-                 alertError.addAction(action)
-                 self.present(alertError, animated: true, completion: nil)
-             }
-     
+        hideLoadingIndicator()
+        
+        let alertError = UIAlertController(
+            title: "Что-то пошло не так(",
+            message: message,
+            preferredStyle: .alert)
+        let action = UIAlertAction(title: "Попробовать еще раз?",
+                                   style: .default) { _ in
+            
+            
+            self.questionFactory = QuestionFactory(moviesLoader: MoviesLoader())
+            
+            self.questionFactory?.delegate = self
+            
+            self.statisticService = StatisticServiceImplementation()
+            
+            self.questionFactory?.loadData()
+            
+            self.showLoadingIndicator()
+            
+        }
+        alertError.addAction(action)
+        self.present(alertError, animated: true, completion: nil)
+    }
+    
     
     func didFailToLoadData(with error: Error) {
         showNetworkError(message: error.localizedDescription) // возьмём в качестве сообщения описание ошибки
