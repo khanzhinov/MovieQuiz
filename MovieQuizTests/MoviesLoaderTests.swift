@@ -11,13 +11,13 @@ import XCTest
 
 class MoviesLoaderTests: XCTestCase {
     
-   /* func testSuccessLoading() throws {
+   func testSuccessLoading() throws {
         // Given
         let stubNetworkClient = StubNetworkClient(emulateError: false) // говорим, что не хотим эмулировать ошибку
         let loader = MoviesLoader(networkClient: stubNetworkClient)
         
         // When
-        let expectation = expectation(description: "Loading expectation")
+       let expectation = XCTestExpectation(description: "")
         
         loader.loadMovies { result in
             // Then
@@ -31,9 +31,9 @@ class MoviesLoaderTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1)
+       wait(for: [expectation], timeout: 5)
     }
-    */
+    
     func testFailureLoading() throws {
         // Given
         let stubNetworkClient = StubNetworkClient(emulateError: true) // говорим, что хотим эмулировать ошибку
@@ -53,7 +53,7 @@ class MoviesLoaderTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 5)
+        wait(for: [expectation], timeout: 5)
     }
     
     
