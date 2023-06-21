@@ -20,6 +20,7 @@
 		150697592A1FD7BC0089BA99 /* AlertPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150697582A1FD7BC0089BA99 /* AlertPresenterDelegate.swift */; };
 		1506975B2A1FD85E0089BA99 /* StaticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1506975A2A1FD85E0089BA99 /* StaticsService.swift */; };
 		154C8D7F2A42FA4900FA26B8 /* MovieQuizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154C8D7E2A42FA4900FA26B8 /* MovieQuizUITests.swift */; };
+		154C8D852A4301D900FA26B8 /* MovieQuizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154C8D7E2A42FA4900FA26B8 /* MovieQuizUITests.swift */; };
 		15656FD129FEFA2D00A659B8 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15656FCF29FEFA2D00A659B8 /* YS Display-Medium.ttf */; };
 		15656FD229FEFA2D00A659B8 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15656FD029FEFA2D00A659B8 /* YS Display-Bold.ttf */; };
 		15B7481E2A3CF96700071470 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B7481D2A3CF96700071470 /* ArrayTests.swift */; };
@@ -371,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15B7481E2A3CF96700071470 /* ArrayTests.swift in Sources */,
+				154C8D852A4301D900FA26B8 /* MovieQuizUITests.swift in Sources */,
 				15B8C6552A4226840006C93C /* MoviesLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

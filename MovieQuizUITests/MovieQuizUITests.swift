@@ -7,23 +7,36 @@
 
 import XCTest
 
-final class MovieQuizUITests: XCTestCase {
-
+class MovieQuizUITests: XCTestCase {
+    // swiftlint:disable:next implicitly_unwrapped_optional
+    var app: XCUIApplication!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        
+        app = XCUIApplication()
+        app.launch()
+        
+        // это специальная настройка для тестов: если один тест не прошёл,
+        // то следующие тесты запускаться не будут; и правда, зачем ждать?
+        continueAfterFailure = false
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        
+        app.terminate()
+        app = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    
+    func testYesButton() {
+        let firstPoster = app.images["Poster"] // находим первоначальный постер
+        
+        app.buttons["Yes"].tap() // находим кнопку `Да` и нажимаем её
+        
+        let secondPoster = app.images["Poster"] // ещё раз находим постер
+        
+        XCTAssertFalse(firstPoster == secondPoster) // проверяем, что постеры разные
     }
-
-
 }
