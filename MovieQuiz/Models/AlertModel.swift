@@ -15,4 +15,4 @@ struct AlertModel {
     let completion: ((UIAlertAction) -> Void)?
 }
 
-//alert.view.accessibilityIdentifier = "Alert"
+
