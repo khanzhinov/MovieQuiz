@@ -9,6 +9,7 @@
 
 import Foundation
 
+
 protocol StatisticService {
     func store(correct count: Int, total amount: Int)
     var totalAccuracy: Double { get }
@@ -57,7 +58,7 @@ final class StatisticServiceImplementation: StatisticService {
         userDefaults.set(self.total + amount, forKey: Keys.total.rawValue)
         userDefaults.set(self.correct + count, forKey: Keys.correct.rawValue)
         
-        let currentResult = GameRecord(correct: count, total: amount, date: Date () )
+        let currentResult = GameRecord(correct: count, total: amount, date: date)
         
         if bestGame < currentResult {
             self.bestGame = currentResult

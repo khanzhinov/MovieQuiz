@@ -7,25 +7,30 @@
 
 import Foundation
 
-struct Actor: Codable {
-     let id: String
-     let image: String
-     let name: String
-     let asCharacter: String
+struct Movies: Codable {
+     let errorMessage: String
+     let items: [MovieData]
  }
 
- struct Movie: Codable {
-     let id: String
-     let rank: String
-     let title: String
-     let fullTitle: String
-     let year: String
-     let image: String
-     let crew: String
-     let imDbRating: String
-     let imDbRatingCount: String
- }
-
- struct Top: Decodable {
-     let items: [Movie]
- }
+struct MovieData: Codable {
+    let title: String
+    let rating: String
+    let imageURL: URL
+    var resizedImageURL: URL {
+        
+        let urlString = imageURL.absoluteString
+        
+        let imageUrlString = urlString.components(separatedBy: "._")[0] + "._V0_UX600_.jpg"
+        
+        guard let newURL = URL(string: imageUrlString) else {
+            return imageURL
+        }
+        return newURL
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case title = "fullTitle"
+        case rating = "imDbRating"
+        case imageURL = "image"
+    }
+}
