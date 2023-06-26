@@ -16,7 +16,7 @@ protocol MoviesLoading {
      // MARK: - NetworkClient
      
      private let networkClient: NetworkRouting
-     
+
      init(networkClient: NetworkRouting = NetworkClient()) {
          self.networkClient = networkClient
      }
@@ -24,7 +24,6 @@ protocol MoviesLoading {
      //MARK: - URL
      
      private var mostPopularMoviesUrl: URL {
-         // Если мы не смогли преобразовать строку в URL, то приложение упадет с ошибкой
          guard let url = URL(string: "https://imdb-api.com/en/API/MostPopularMovies/k_def89lmr") else {
              preconditionFailure("Unable to construct mostPopularMoviesURL")
          }
@@ -32,7 +31,6 @@ protocol MoviesLoading {
      }
 
      private var top250MoviesUrl: URL {
-         // Если мы не смогли преобразовать строку в URL, то приложение упадет с ошибкой
          guard let url = URL(string: "https://imdb-api.com/en/API/Top250Movies/k_def89lmr") else {
              preconditionFailure("Unable to construct top250MoviesUrl")
          }
@@ -45,6 +43,7 @@ protocol MoviesLoading {
 
          var mostPopularMoviesData: Movies?
          var top250MoviesData: Movies?
+         var loadError: Error?
 
          let group = DispatchGroup()
 
@@ -58,11 +57,11 @@ protocol MoviesLoading {
                      group.leave()
 
                  } catch {
-                     handler(.failure(error))
+                     loadError = error
                      group.leave()
                  }
              case .failure(let error):
-                 handler(.failure(error))
+                 loadError = error
                  group.leave()
              }
          }
@@ -77,19 +76,21 @@ protocol MoviesLoading {
                      group.leave()
 
                  } catch {
-                     handler(.failure(error))
+                     loadError = error
                      group.leave()
                  }
              case .failure(let error):
-                 handler(.failure(error))
+                 loadError = error
                  group.leave()
              }
          }
 
          group.notify(queue: .main) {
-             if top250MoviesData?.items.count ?? 0 > 0 || mostPopularMoviesData?.items.count ?? 0 > 0 {
+             if let loadError = loadError {
+                 handler(.failure(loadError))
+             } else {
                  let allMovies = (top250MoviesData?.items ?? [MovieData]()) + (mostPopularMoviesData?.items ?? [MovieData]())
-                 handler(.success(Movies(errorMessage: "", items: allMovies)))
+                 handler(.success(Movies(errorMessage: "", items: Array((allMovies)))))
              }
          }
      }
