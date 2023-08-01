@@ -24,7 +24,7 @@ protocol MoviesLoading {
      //MARK: - URL
      
      private var mostPopularMoviesUrl: URL {
-         guard let url = URL(string: "https://imdb-api.com/en/API/MostPopularMovies/k_def89lmr") else {
+         guard let url = URL(string: "https://imdb-api.com/en/API/MostPopularMovies/k_zcuw1ytf") else {
              preconditionFailure("Unable to construct mostPopularMoviesURL")
          }
          return url
